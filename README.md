@@ -136,17 +136,26 @@ Recent:
 </tr>
 </table>
 
-## Install
+## Install — as a Claude Code plugin
 
-```bash
-npx wisp-rulecast install
+```text
+/plugin marketplace add Samuel0101010/wisp-rulecast
+/plugin install wisp-rulecast@wisp
 ```
 
-That deploys the SKILL, the `/wisp-rulecast` slash command, and the runtime
-dispatcher into `.claude/`, then runs the first `compile` if a `CLAUDE.md`
-already exists. From the next Claude Code session, the hooks are live.
+That's it. The plugin ships its own Node bundle, the skill, the slash command, and the runtime dispatcher source. No `npm install`, no global CLI, no `npm publish` 2FA dance. While the plugin is enabled the `wisp-rulecast` binary is on `PATH` and the `/wisp-rulecast` slash command is registered.
 
 The skill auto-triggers whenever you edit `CLAUDE.md` — no manual recompile.
+
+### Without the plugin (clone-and-run)
+
+```bash
+git clone https://github.com/Samuel0101010/wisp-rulecast.git
+cd wisp-rulecast
+npm install && npm run build
+node dist/index.js install     # copies skill + command into your project
+node dist/index.js compile
+```
 
 ## Use
 
