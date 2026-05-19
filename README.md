@@ -171,13 +171,13 @@ wisp-rulecast compile [--dry-run] [--explain]
 ```
 
 — or say *"compile the rules"* / *"enforce CLAUDE.md"* in chat and the
-skill triggers it for you, or type `/wisp-rulecast compile`.
+skill triggers it for you, or type `/wisp-rulecast:compile` (namespaced).
 
 ### Commands
 
 | Command | What it does |
 |---|---|
-| `install` | Copy skill + slash command + dispatcher into the project; first compile |
+| `install` | Clone-and-run bootstrap only — copies skill + command into the project, then compiles. Plugin users skip this; the plugin already deploys them. |
 | `compile` | Parse `CLAUDE.md`, write rules.json + dispatcher + merge hooks into `settings.json` |
 | `compile --dry-run` | Compute everything, write nothing |
 | `compile --explain` | Print every vague rule with a refactor suggestion |
@@ -262,11 +262,12 @@ complementary tools:
 ## Status & roadmap
 
 v0.1 ships the parser, five hook templates, idempotent merger, runtime
-dispatcher, audit log, self-check, install command, and 53 tests including
-an end-to-end dispatcher-spawn integration test. Build roadmap and open
-questions live in [`CLAUDE.md`](./CLAUDE.md); v1.0 launch gate in
-[`docs/launch-checklist.md`](docs/launch-checklist.md). Issues and PRs
-welcome.
+dispatcher, audit log, self-check, and 53 tests including an end-to-end
+dispatcher-spawn integration test. Distributed as a Claude Code plugin
+(repo doubles as a single-plugin marketplace via `.claude-plugin/marketplace.json`).
+Build roadmap and open questions live in [`CLAUDE.md`](./CLAUDE.md);
+v1.0 launch gate in [`docs/launch-checklist.md`](docs/launch-checklist.md).
+Issues and PRs welcome.
 
 ## Develop
 

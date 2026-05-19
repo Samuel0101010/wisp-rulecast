@@ -22,7 +22,7 @@
 - [x] `npm test` green (>=50 tests including end-to-end dispatcher spawn)
 - [x] `npm run build` produces a single ESM bundle
 - [ ] CI green on Ubuntu, macOS, Windows (matrix already configured)
-- [ ] Manual smoke on a fresh project: `npx wisp-rulecast install` → edit `CLAUDE.md` → `git add .env` blocked
+- [x] Manual smoke on a fresh project (sandbox): `/plugin install wisp-rulecast@wisp` → edit `CLAUDE.md` → `wisp-rulecast compile` → dispatcher denies synthetic `git add .env` with the right source-line ref
 
 ## Documentation
 
