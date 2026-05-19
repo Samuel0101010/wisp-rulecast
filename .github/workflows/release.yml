@@ -16,11 +16,11 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Job-level env so step-level `if:` can read NODE_AUTH_TOKEN — step env
-    # is not materialised until after `if:` evaluates, which silently
-    # disables the publish step.
+    # Quoted so that an undefined NPM_TOKEN substitutes to "" (string) rather
+    # than YAML-null. With null, `env.NODE_AUTH_TOKEN != ''` evaluates true
+    # (different types) and the publish step runs anyway with no auth → 404.
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,13 +33,17 @@ jobs:
       - run: npm run verify
 
       - name: Publish to npm
-        # Skip when:
-        #   - tag is a prerelease (contains '-')
-        #   - NPM_TOKEN secret is not configured (pre-launch, dry runs)
-        if: ${{ !contains(github.ref, '-') && env.NODE_AUTH_TOKEN != '' }}
+        # Skip when the tag is a prerelease (contains '-') or when NPM_TOKEN
+        # is not configured. We check the secret directly because the
+        # secrets context is well-typed in step `if:` — `secrets.X` always
+        # returns "" when undefined, never null.
+        if: ${{ !contains(github.ref, '-') && secrets.NPM_TOKEN != '' }}
         run: npm publish --access public --provenance
 
       - name: GitHub Release
+        # Run even if the publish step skipped — we always want the release
+        # entry on the repo for every tag push.
+        if: ${{ always() && !cancelled() }}
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
