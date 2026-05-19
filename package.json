@@ -14,7 +14,7 @@
     "guardrails"
   ],
   "license": "MIT",
-  "author": "Samuel Heftberger",
+  "author": "Samuel Heftberger <215513082+Samuel0101010@users.noreply.github.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Samuel0101010/wisp-rulecast.git"
@@ -35,8 +35,7 @@
     "docs/assets"
   ],
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "engines": {
     "node": ">=20"
