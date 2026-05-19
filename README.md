@@ -143,9 +143,16 @@ Recent:
 /plugin install wisp-rulecast@wisp
 ```
 
-That's it. The plugin ships its own Node bundle, the skill, the slash command, and the runtime dispatcher source. No `npm install`, no global CLI, no `npm publish` 2FA dance. While the plugin is enabled the `wisp-rulecast` binary is on `PATH` and the `/wisp-rulecast` slash command is registered.
+That's it. The plugin ships its own Node bundle, the skill, and the runtime dispatcher source. No `npm install`, no global CLI. While the plugin is enabled, the `wisp-rulecast` binary is on `PATH` and the `/wisp-rulecast:compile` skill is registered. The skill auto-triggers whenever you edit `CLAUDE.md` — no manual recompile.
 
-The skill auto-triggers whenever you edit `CLAUDE.md` — no manual recompile.
+### Two install-time gotchas
+
+- **`Permission denied (publickey)` on `/plugin marketplace add`.** Claude Code clones marketplaces via SSH by default, even for public repos. If you don't have a GitHub SSH key set up, run this once and retry:
+  ```bash
+  git config --global "url.https://github.com/.insteadOf" "git@github.com:"
+  ```
+  PowerShell needs the literal space between the two quoted arguments.
+- **Re-installing after an upstream fix.** Claude Code caches the marketplace manifest. If you installed once, hit an error, and a fix was pushed, do `/plugin marketplace remove wisp` and then `/plugin marketplace add Samuel0101010/wisp-rulecast` again — otherwise you re-install from the cached (broken) manifest.
 
 ### Without the plugin (clone-and-run)
 
