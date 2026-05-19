@@ -298,7 +298,8 @@ mcp__ruflo__memory_search { query: "wisp-rulecast github idea mechanical enforce
 
 ## Status-Tracking
 
-**Aktuelle Phase:** 0 (Pre-Flight)
-**Nächste Action:** Phase 0 Reading-Liste abarbeiten, dann Phase 1.
-**Blocker:** keine
-**Letzter Release-Tag:** —
+**Aktuelle Phase:** 8 abgeschlossen + Plugin-Distribution live.
+**Distribution:** Claude Code Plugin (`.claude-plugin/`), nicht npm. Installation via `/plugin marketplace add Samuel0101010/wisp-rulecast` + `/plugin install wisp-rulecast@wisp`. End-to-end im Plugin-Cache sandbox verifiziert (9/9 rules deny, bin auf PATH, dispatcher liefert exit-0 + JSON-deny payload).
+**Nächste mögliche Schritte:** vhs-demo-GIF (`scripts/demo.tape` existiert), Submission an `claude-plugins-community` marketplace, evtl. v0.2 Features (hooks/hooks.json auto-trigger, weitere rule-kinds wie `MAX FILE SIZE`).
+**Blocker:** keine.
+**Letzter Release-Tag:** v0.1.0 (2026-05-19) — GitHub Release vorhanden, npm-publish bewusst nicht passiert (Account-Policy + Plugin-Pfad reicht).
