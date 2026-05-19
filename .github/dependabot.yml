@@ -6,8 +6,21 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     groups:
+      runtime-dependencies:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
       dev-dependencies:
         dependency-type: development
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Major bumps require manual review — major-version PRs cluttered
+      # the inbox on day 1 (zod 3 → 4). Re-evaluate manually instead.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /

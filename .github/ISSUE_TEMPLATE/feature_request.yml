@@ -1,0 +1,29 @@
+name: Feature / new rule kind
+description: A pattern of CLAUDE.md rule that isn't yet enforceable, or a CLI feature.
+title: "[Feat] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: example
+    attributes:
+      label: The rule (or feature) you want
+      description: Concrete sentence from a real CLAUDE.md, not an abstract description.
+      render: markdown
+      placeholder: |
+        MAX FILE SIZE 500 lines
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why mechanical enforcement matters here
+      description: What does the model do today that it shouldn't?
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: How the hook would work (optional)
+      description: If you've thought about it. PostToolUse line-count check? Different matcher?
