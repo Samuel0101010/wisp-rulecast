@@ -1,3 +1,12 @@
+# GitHub Release on tag push. Runs `npm run verify` for sanity, then creates
+# a release with auto-generated notes.
+#
+# npm publish is intentionally NOT in this workflow — manual `npm publish`
+# from a maintainer's local is the established pattern (matches wisp-agentdiff).
+# When CI-publish is wanted: add NPM_TOKEN as a repo secret and reintroduce a
+# `npm publish --access public --provenance` step guarded by
+# `if: ${{ secrets.NPM_TOKEN != '' && !contains(github.ref, '-') }}`.
+
 name: release
 
 on:
@@ -7,7 +16,6 @@ on:
 
 permissions:
   contents: write
-  id-token: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -16,34 +24,22 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Quoted so that an undefined NPM_TOKEN substitutes to "" (string) rather
-    # than YAML-null. With null, `env.NODE_AUTH_TOKEN != ''` evaluates true
-    # (different types) and the publish step runs anyway with no auth → 404.
-    env:
-      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}"
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
-          registry-url: "https://registry.npmjs.org"
 
-      - run: npm ci
-      - run: npm run verify
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Publish to npm
-        # Skip when the tag is a prerelease (contains '-') or when NPM_TOKEN
-        # is not configured. We check the secret directly because the
-        # secrets context is well-typed in step `if:` — `secrets.X` always
-        # returns "" when undefined, never null.
-        if: ${{ !contains(github.ref, '-') && secrets.NPM_TOKEN != '' }}
-        run: npm publish --access public --provenance
+      - name: Verify (lint + typecheck + test + build)
+        run: npm run verify
 
       - name: GitHub Release
-        # Run even if the publish step skipped — we always want the release
-        # entry on the repo for every tag push.
-        if: ${{ always() && !cancelled() }}
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
