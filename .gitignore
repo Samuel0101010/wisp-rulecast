@@ -1,0 +1,50 @@
+# Dependencies & build output
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Logs & caches
+*.log
+.cache/
+tmp/
+.npm/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local-only Claude / agent tooling — never commit
+.claude/settings.local.json
+.claude/wisp-rulecast.log
+.claude/wisp-rulecast/
+
+# Ruflo / claude-flow local state (NOT part of this project)
+.swarm/
+.claude-flow/
+.hive-mind/
+agentdb.rvf
+agentdb.rvf.lock
+*.rvf
+*.rvf.lock
+
+# Source PNG masters — the trimmed, transparent versions in docs/assets/ are the
+# canonical ones shipped with the repo. Keep the originals out of git so we
+# don't bloat the history with 20 MB of duplicate source art.
+/WISP_Figur.png
+/WISP_Schriftzug.png
+
+# Local-only settings files in general
+*.local.json
+*.local.yml
+
+# Test scratch
+.tmp-test/

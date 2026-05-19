@@ -1,0 +1,71 @@
+{
+  "name": "wisp-rulecast",
+  "version": "0.1.0",
+  "description": "Compile your CLAUDE.md rules to real Claude Code hooks.",
+  "keywords": [
+    "claude-code",
+    "claude.md",
+    "hooks",
+    "rules",
+    "enforcement",
+    "compiler",
+    "anthropic",
+    "pretooluse",
+    "guardrails"
+  ],
+  "license": "MIT",
+  "author": "Samuel Heftberger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuel0101010/wisp-rulecast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Samuel0101010/wisp-rulecast/issues"
+  },
+  "homepage": "https://github.com/Samuel0101010/wisp-rulecast#readme",
+  "type": "module",
+  "bin": {
+    "wisp-rulecast": "dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs/assets"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check src tests",
+    "lint:fix": "biome check --write src tests",
+    "format": "biome format --write src tests",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "prepublishOnly": "npm run verify"
+  },
+  "dependencies": {
+    "mdast-util-to-string": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^20.14.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

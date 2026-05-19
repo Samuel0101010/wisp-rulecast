@@ -1,0 +1,15 @@
+# Enforce LF on all text files in the repo so Windows clones produce the
+# same bytes as Linux/macOS clones. The single Node dispatcher we generate
+# ships as ES-module source — CRLF endings would silently break it on Unix
+# when consumed as a hook command.
+
+* text=auto eol=lf
+
+# Binary assets — don't touch.
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+
+# Lockfiles — don't diff-bait.
+package-lock.json -diff
