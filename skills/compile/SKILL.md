@@ -1,6 +1,5 @@
 ---
-description: Keep Claude Code hooks in sync with the project's CLAUDE.md. Use after the user edits CLAUDE.md, when they add a NEVER/ALWAYS/DO NOT rule, or whenever they ask to "compile rules", "enforce CLAUDE.md", "lock in the rules", or "regenerate hooks". Turns prose rules into PreToolUse hooks so the next tool call that would break a rule is denied at the protocol layer.
-allowed-tools: Bash(wisp-rulecast:*), Bash(node ${CLAUDE_PLUGIN_ROOT}/dist/index.js:*), Read
+description: Re-compile CLAUDE.md rules into Claude Code PreToolUse hooks. Use after the user edits CLAUDE.md, when they add a NEVER/ALWAYS/DO NOT rule, or whenever they ask to "compile rules", "enforce CLAUDE.md", "lock in the rules", or "regenerate hooks". Turns prose rules into hooks so the next tool call that would break a rule is denied at the protocol layer.
 ---
 
 # wisp-rulecast — compile CLAUDE.md rules to hooks
@@ -16,7 +15,7 @@ Behavioral rules in `CLAUDE.md` ("NEVER commit `.env`") are advisory until they 
 
 ## What to do
 
-1. Run `wisp-rulecast compile`. (Inside the plugin's bin directory; the binary is on `PATH` while the plugin is enabled.)
+1. Run `wisp-rulecast compile`. The binary is on `PATH` while this plugin is enabled.
 2. If output flags vague rules, surface them to the user with the suggested rephrasing.
 3. Run `wisp-rulecast verify` to confirm the dispatcher denies a synthetic violation per rule.
 
@@ -30,5 +29,7 @@ Do **not** hand-edit `.claude/settings.json` for rules that came from `CLAUDE.md
 | `wisp-rulecast verify` | Spawn the dispatcher with a synthetic violating input per rule, assert deny |
 | `wisp-rulecast audit [--since 24h]` | Markdown summary of blocked violations from the JSON-lines log |
 | `wisp-rulecast reset` | Remove every wisp-rulecast hook from settings.json (user hooks preserved) |
+
+Slash form for explicit compile: `/wisp-rulecast:compile`. Audit / verify / reset are invoked as bash commands directly (the binary is on `PATH`).
 
 Full grammar reference: `docs/rule-grammar.md`. Generated hook shapes: `docs/hook-templates.md`.

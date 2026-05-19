@@ -1,5 +1,6 @@
 {
   "name": "wisp",
+  "description": "Wisp-family Claude Code plugins by Samuel Heftberger. Currently: wisp-rulecast (compile CLAUDE.md rules into PreToolUse hooks).",
   "owner": {
     "name": "Samuel Heftberger",
     "url": "https://github.com/Samuel0101010"
