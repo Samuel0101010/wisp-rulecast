@@ -1,9 +1,11 @@
 # Dependencies & build output
 node_modules/
-dist/
 build/
 coverage/
 *.tsbuildinfo
+# dist/ is committed because the Claude Code plugin distribution
+# ships it as the runnable bundle. Built by `npm run build` and
+# verified by CI on every push.
 
 # Logs & caches
 *.log

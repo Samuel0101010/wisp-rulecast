@@ -1,0 +1,20 @@
+{
+  "name": "wisp-rulecast",
+  "description": "Compile your CLAUDE.md rules into real Claude Code PreToolUse hooks. NEVER/ALWAYS prose becomes mechanical enforcement.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Samuel Heftberger",
+    "url": "https://github.com/Samuel0101010"
+  },
+  "homepage": "https://github.com/Samuel0101010/wisp-rulecast#readme",
+  "repository": "https://github.com/Samuel0101010/wisp-rulecast",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-md",
+    "hooks",
+    "pretooluse",
+    "guardrails",
+    "rule-enforcement"
+  ]
+}

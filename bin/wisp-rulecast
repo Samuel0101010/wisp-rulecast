@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# wisp-rulecast launcher (Unix). Plugin ships its own Node bundle so users
+# don't need a global install. CLAUDE_PLUGIN_ROOT is set by Claude Code
+# while the plugin is enabled; fall back to the script's parent directory
+# for `--plugin-dir` testing.
+
+set -e
+
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  root="${CLAUDE_PLUGIN_ROOT}"
+else
+  here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  root="$(cd "${here}/.." && pwd)"
+fi
+
+exec node "${root}/dist/index.js" "$@"

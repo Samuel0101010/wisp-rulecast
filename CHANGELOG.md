@@ -7,6 +7,20 @@ the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+- Distribution pivots from npm to Claude Code plugin. The repo is now a
+  one-plugin marketplace: install with
+  `/plugin marketplace add Samuel0101010/wisp-rulecast` →
+  `/plugin install wisp-rulecast@wisp`. npm publish is no longer the
+  primary path (and the npm account's post-2025 2FA policy made it
+  friction-heavy anyway).
+- `dist/` is now committed because the plugin ships its bundled CLI.
+- Plugin layout added: `.claude-plugin/plugin.json`,
+  `.claude-plugin/marketplace.json`, `skills/wisp-rulecast/SKILL.md`,
+  `commands/wisp-rulecast.md`, `bin/wisp-rulecast` (+ `.cmd` for Windows).
+- README install section rewritten for the plugin path; the legacy
+  clone-and-run flow is kept as an alternative.
+
 ## [0.1.0] — 2026-05-19
 
 Initial release.
